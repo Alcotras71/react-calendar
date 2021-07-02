@@ -1,9 +1,10 @@
 import React from 'react';
+import Datepicker from './Components/Datepicker/Datepicker'
+import DataEvent from './Components/DataEvent/DataEvent'
+
 import "./style.scss";
-import Header from './Components/Header';
 
 class App extends React.Component {
-
   constructor(props: any) {
     super(props)
   }
@@ -11,7 +12,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-wrapper">
-        <Header publish="storyBook"/>
+        <Datepicker />
+        <DataEvent/>
       </div>
     );
   }
