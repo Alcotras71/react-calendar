@@ -1,13 +1,13 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, FC } from "react";
 import { useDay } from "@datepicker-react/hooks";
 import DatepickerContext from "./datepickerContext";
 
 type DayPropsType = {
-  day: string
-  date: Date
-}
+  day: string;
+  date: Date;
+};
 
-const Day = ({ day, date }:DayPropsType) => {
+const Day:FC<DayPropsType> = ({ day, date }) => {
   const dayRef = useRef(null);
   const {
     focusedDate,
@@ -18,7 +18,7 @@ const Day = ({ day, date }:DayPropsType) => {
     isFirstOrLastSelectedDate,
     onDateSelect,
     onDateFocus,
-    onDateHover
+    onDateHover,
   } = useContext(DatepickerContext);
   const {
     isSelected,
@@ -26,7 +26,7 @@ const Day = ({ day, date }:DayPropsType) => {
     onClick,
     onKeyDown,
     onMouseEnter,
-    tabIndex
+    tabIndex,
   } = useDay({
     date,
     focusedDate,
@@ -38,7 +38,7 @@ const Day = ({ day, date }:DayPropsType) => {
     onDateFocus,
     onDateSelect,
     onDateHover,
-    dayRef
+    dayRef,
   });
 
   if (!day) {
@@ -55,12 +55,12 @@ const Day = ({ day, date }:DayPropsType) => {
       ref={dayRef}
       style={{
         color: isSelected || isSelectedStartOrEnd ? "white" : "black",
-        background: isSelected || isSelectedStartOrEnd ? "blue" : "white"
+        background: isSelected || isSelectedStartOrEnd ? "blue" : "white",
       }}
     >
       {day}
     </button>
   );
-}
+};
 
 export default Day;

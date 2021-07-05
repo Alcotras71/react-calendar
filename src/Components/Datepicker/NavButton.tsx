@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 
 interface NavButtonType  {
   children: React.ReactNode,
   callback: () => void
 }
 
-const NavButton =({ children, callback }:NavButtonType):React.ReactNode =>{
+const NavButton:FC<NavButtonType> =({ children, callback }) =>{
   return (
     <button type="button" onClick={callback}>
       {children}
