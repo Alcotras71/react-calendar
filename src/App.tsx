@@ -1,15 +1,18 @@
 import React from "react";
+import UserCardContainer from "./Components/UserCard/UserCardContainer";
 import DatepickerContainer from "./Components/Datepicker/DatepickerContainer";
-import DataEvent from "./Components/DataEvent/DataEvent";
 
-import "./scss/style.scss";
+import "./scss/global/reset.scss";
+import "./scss/global/global.scss";
 
 class App extends React.Component {
   render() {
     return (
-      <div className="app-wrapper">
-        <DatepickerContainer />
-        <DataEvent />
+      <div className="app">
+        <div className="app__wrapper">
+          <DatepickerContainer />
+          <UserCardContainer />
+        </div>
       </div>
     );
   }

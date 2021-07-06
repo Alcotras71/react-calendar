@@ -1,62 +1,40 @@
-import React, { useRef, useContext, FC } from "react";
-import { useDay } from "@datepicker-react/hooks";
-import DatepickerContext from "./datepickerContext";
+import React, { FC } from "react";
+import moment from "moment";
+import { PickedDate } from "../../types/types";
 
 type DayPropsType = {
   day: string;
+  bgcolor?: string;
   date: Date;
+  getDate: (payload: PickedDate) => void;
+  toggleCard: (payload: boolean) => void;
+  month: number;
 };
 
-const Day:FC<DayPropsType> = ({ day, date }) => {
-  const dayRef = useRef(null);
-  const {
-    focusedDate,
-    isDateFocused,
-    isDateSelected,
-    isDateHovered,
-    isDateBlocked,
-    isFirstOrLastSelectedDate,
-    onDateSelect,
-    onDateFocus,
-    onDateHover,
-  } = useContext(DatepickerContext);
-  const {
-    isSelected,
-    isSelectedStartOrEnd,
-    onClick,
-    onKeyDown,
-    onMouseEnter,
-    tabIndex,
-  } = useDay({
-    date,
-    focusedDate,
-    isDateFocused,
-    isDateSelected,
-    isDateHovered,
-    isDateBlocked,
-    isFirstOrLastSelectedDate,
-    onDateFocus,
-    onDateSelect,
-    onDateHover,
-    dayRef,
-  });
-
+const Day: FC<DayPropsType> = ({
+  day,
+  bgcolor,
+  date,
+  getDate,
+  month,
+  toggleCard,
+}) => {
   if (!day) {
     return <div />;
   }
 
   return (
     <button
-      onClick={onClick}
-      onKeyDown={onKeyDown}
-      onMouseEnter={onMouseEnter}
-      tabIndex={tabIndex}
-      type="button"
-      ref={dayRef}
-      style={{
-        color: isSelected || isSelectedStartOrEnd ? "white" : "black",
-        background: isSelected || isSelectedStartOrEnd ? "blue" : "white",
+      onClick={() => {
+        getDate({
+          day: Number(day),
+          month: month,
+          touchedDate: moment(date).add(1, "d").toDate(),
+        });
+        toggleCard(true);
       }}
+      className={`datepicker__day ${bgcolor ? "selected" : ""}`}
+      type="button"
     >
       {day}
     </button>

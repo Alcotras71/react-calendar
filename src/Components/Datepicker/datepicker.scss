@@ -1,0 +1,82 @@
+$main-color: rgb(0, 166, 153);
+$secondary-color: rgb(102, 226, 218);
+$grey: #ccc;
+
+.datepicker {
+  height: 400px;
+  width: 400px;
+
+  &__month-btn {
+    width: 40px;
+    height: 40px;
+    margin-right: 50px;
+    border-radius: 50%;
+    background-color: $main-color;
+    color: #fff;
+    font-size: 25px;
+    transition: all 0.5s ease;
+    box-shadow: -3px 3px 3px $grey;
+
+    &:first-child {
+      box-shadow: -5px 5px 5px $grey;
+    }
+
+    &:hover {
+      background-color: $secondary-color;
+      transform: translate(0%, 6%);
+    }
+  }
+
+  &__day {
+    width: 50px;
+    height: 50px;
+    border: 1px solid $grey;
+    background-color: $main-color;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background-color: $secondary-color;
+      color: #000;
+    }
+
+    &.selected {
+      background-color: $secondary-color;
+      color: #000;
+    }
+  }
+
+  &__label {
+    text-align: center;
+    margin: 0 0 16px;
+    font-weight: 700;
+    font-size: 25px;
+  }
+
+  &__week {
+    width: 350px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  &__calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-content: center;
+  }
+
+  &__wrapper {
+    display: grid;
+    margin: 32px 0 0;
+    grid-gap: 0 64px;
+  }
+
+  &__month-btn-wrapper {
+    display: flex;
+    justify-content: space-between
+  }
+}

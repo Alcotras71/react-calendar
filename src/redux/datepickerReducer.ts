@@ -1,17 +1,13 @@
 import React from "react";
-import {
-  START_DATE,
-  FocusedInput,
-  OnDatesChangeProps,
-} from "@datepicker-react/hooks";
+import { PickedDate } from "../types/types";
+import { updateObjectInArray } from "../utils/helpers/object-helpers";
 
-const CHANGE_FOCUS = "datepicker/CHANGE_FOCUSE";
-const CHANGE_DATA = "datepicker/CHANGE_DATA";
+const GET_DATE = "datepicker/GET_DATE";
+const TOGGLE_CARD = "datepicker/TOGGLE_CARD";
 
 const initialState = {
-  startDate: null as null | Date,
-  endDate: null as null | Date,
-  focusedInput: START_DATE as FocusedInput,
+  pickedDate: [] as Array<PickedDate>,
+  isOpen: false as boolean,
 };
 
 export type DatepickerStateType = typeof initialState;
@@ -21,41 +17,42 @@ const datepickerReducer = (
   action: ActionsTypes
 ): DatepickerStateType => {
   switch (action.type) {
-    case CHANGE_FOCUS:
+    case GET_DATE:
       return {
         ...state,
-        focusedInput: action.date,
+        pickedDate: updateObjectInArray(state.pickedDate, action.payload),
       };
-    case CHANGE_DATA:
+
+    case TOGGLE_CARD:
       return {
         ...state,
-        ...action.data,
+        isOpen: action.payload,
       };
     default:
       return state;
   }
 };
 
-type ActionsTypes = ChangeFocus | ChangeData;
+type ActionsTypes = getDate | toggleCard;
 
-export type ChangeFocus = {
-  type: typeof CHANGE_FOCUS;
-  date: typeof START_DATE;
+type getDate = {
+  type: typeof GET_DATE;
+  payload: PickedDate;
 };
 
-export const changeFocusInput = (date: typeof START_DATE): ChangeFocus => ({
-  type: CHANGE_FOCUS,
-  date,
+export const getDate = (payload: PickedDate): getDate => ({
+  type: GET_DATE,
+  payload,
 });
 
-export type ChangeData = {
-  type: typeof CHANGE_DATA;
-  data: OnDatesChangeProps
+type toggleCard = {
+  type: typeof TOGGLE_CARD;
+  payload: boolean;
 };
 
-export const changeData = ({startDate, endDate, focusedInput}: OnDatesChangeProps): ChangeData => ({
-  type: CHANGE_DATA,
-  data: {startDate, endDate, focusedInput},
+export const toggleCard = (payload: boolean): toggleCard => ({
+  type: TOGGLE_CARD,
+  payload,
 });
 
 export default datepickerReducer;

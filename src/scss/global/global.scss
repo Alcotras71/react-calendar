@@ -1,0 +1,21 @@
+body {
+  background-color: rgb(238, 245, 237);
+  color: rgb(7, 4, 4);
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+
+  &__wrapper {
+    width: 850px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+}
+
+

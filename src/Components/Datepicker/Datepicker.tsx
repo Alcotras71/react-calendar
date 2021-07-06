@@ -6,24 +6,16 @@ import {
   FocusedInput,
 } from "@datepicker-react/hooks";
 import Month from "./Month";
-import DatepickerContext from "./datepickerContext";
-import { DatepickerStateType } from "../../redux/datepickerReducer";
+import { PickedDate } from "../../types/types";
+
+import "./datepicker.scss";
 
 type PropsType = {
-  startDate: Date | null;
-  endDate: Date | null;
-  focusedInput: FocusedInput;
-  changeFocusInput: (date: typeof START_DATE) => void;
-  changeData: (data: OnDatesChangeProps) => void;
+  getDate: (payload: PickedDate) => void;
+  toggleCard: (payload: boolean) => void;
 };
 
-const Datepicker: FC<PropsType> = ({
-  startDate,
-  endDate,
-  focusedInput,
-  changeFocusInput,
-  changeData,
-}) => {
+const Datepicker: FC<PropsType> = ({ getDate, toggleCard }) => {
   const [state, setState] = useState({
     startDate: null as null | Date,
     endDate: null as null | Date,
@@ -32,81 +24,47 @@ const Datepicker: FC<PropsType> = ({
   const {
     firstDayOfWeek,
     activeMonths,
-    isDateSelected,
-    isDateHovered,
-    isFirstOrLastSelectedDate,
-    isDateBlocked,
-    isDateFocused,
-    focusedDate,
-    onDateHover,
-    onDateSelect,
-    onDateFocus,
     goToPreviousMonths,
     goToNextMonths,
   } = useDatepicker({
-    startDate: startDate,
-    endDate: endDate,
-    focusedInput: focusedInput,
+    startDate: state.startDate,
+    endDate: state.endDate,
+    focusedInput: state.focusedInput,
     onDatesChange: handleDateChange,
     numberOfMonths: 1,
   });
 
-  function handleDateChange(data: OnDatesChangeProps): void {
-    if (!focusedInput) {
-      changeFocusInput(START_DATE);
+  function handleDateChange(data: OnDatesChangeProps) {
+    if (!data.focusedInput) {
+      setState({ ...data, focusedInput: START_DATE });
     } else {
-      changeData(data);
+      setState(data);
     }
   }
 
-  // function handleDateChange(data: OnDatesChangeProps): void {
-  //   if (!data.focusedInput) {
-  //     setState({ ...data, focusedInput: START_DATE });
-  //   } else {
-  //     setState(data);
-  //   }
-  // }
-
   return (
-    <DatepickerContext.Provider
-      value={{
-        focusedDate,
-        isDateFocused,
-        isDateSelected,
-        isDateHovered,
-        isDateBlocked,
-        isFirstOrLastSelectedDate,
-        onDateSelect,
-        onDateFocus,
-        onDateHover,
-      }}
-    >
-      <div>
-        <strong>Focused input: </strong>
-        {focusedInput}
+    <div className="datepicker">
+      <div className="datepicker__month-btn-wrapper">
+        <button
+          className="datepicker__month-btn"
+          type="button"
+          onClick={goToPreviousMonths}
+        >
+          {"<"}
+        </button>
+        <button
+          className="datepicker__month-btn"
+          type="button"
+          onClick={goToNextMonths}
+        >
+          {">"}
+        </button>
       </div>
-      <div>
-        <strong>Start date: </strong>
-        {startDate && startDate.toLocaleString()}
-      </div>
-      <div>
-        <strong>End date: </strong>
-        {endDate && endDate.toLocaleString()}
-      </div>
-
-      <button type="button" onClick={goToPreviousMonths}>
-        {"<"}
-      </button>
-      <button type="button" onClick={goToNextMonths}>
-        {">"}
-      </button>
 
       <div
+        className="datepicker__wrapper"
         style={{
-          display: "grid",
-          margin: "32px 0 0",
-          gridTemplateColumns: `repeat(${activeMonths.length}, 300px)`,
-          gridGap: "0 64px",
+          gridTemplateColumns: `repeat(${activeMonths.length}, 350px)`,
         }}
       >
         {activeMonths.map((month) => (
@@ -115,10 +73,12 @@ const Datepicker: FC<PropsType> = ({
             year={month.year}
             month={month.month}
             firstDayOfWeek={firstDayOfWeek}
+            getDate={getDate}
+            toggleCard={toggleCard}
           />
         ))}
       </div>
-    </DatepickerContext.Provider>
+    </div>
   );
 };
 
