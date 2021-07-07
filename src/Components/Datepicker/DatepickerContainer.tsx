@@ -2,15 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { getDate, toggleCard } from "../../redux/datepickerReducer";
 import { AppStateType } from "../../redux/store";
+import { EventData } from "../../types/types";
 import Datepicker from "./Datepicker";
-import { PickedDate } from "../../types/types";
 
 type MapStatePropsType = {
-  isOpen: boolean;
+  eventData: Array<EventData>;
 };
 
 type MapDispatchPropsType = {
-  getDate: (payload: PickedDate) => void;
+  getDate: (payload: Date) => void;
   toggleCard: (payload: boolean) => void;
 };
 
@@ -23,6 +23,7 @@ class DatepickerContainer extends React.Component<PropsType> {
         <Datepicker
           toggleCard={this.props.toggleCard}
           getDate={this.props.getDate}
+          eventData={this.props.eventData}
         />
       </>
     );
@@ -31,7 +32,7 @@ class DatepickerContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType) => {
   return {
-    isOpen: state.datepicker.isOpen,
+    eventData: state.datepicker.eventData,
   };
 };
 

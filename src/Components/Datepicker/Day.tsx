@@ -1,39 +1,42 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import moment from "moment";
-import { PickedDate } from "../../types/types";
 
 type DayPropsType = {
   day: string;
-  bgcolor?: string;
+  todaySelect?: boolean;
   date: Date;
-  getDate: (payload: PickedDate) => void;
+  filledDate?: boolean;
+  getDate: (payload: Date) => void;
   toggleCard: (payload: boolean) => void;
-  month: number;
 };
 
 const Day: FC<DayPropsType> = ({
   day,
-  bgcolor,
+  todaySelect,
   date,
   getDate,
-  month,
   toggleCard,
+  filledDate,
 }) => {
   if (!day) {
     return <div />;
   }
 
+  const [selected, setSelected] = useState(false);
+
   return (
     <button
       onClick={() => {
-        getDate({
-          day: Number(day),
-          month: month,
-          touchedDate: moment(date).add(1, "d").toDate(),
-        });
+        getDate(date);
         toggleCard(true);
+        setSelected(true);
       }}
-      className={`datepicker__day ${bgcolor ? "selected" : ""}`}
+      onBlur={() => {
+        setSelected(false);
+      }}
+      className={`datepicker__day ${
+        todaySelect || selected ? "selected" : ""
+      } ${filledDate ? "event" : ""}`}
       type="button"
     >
       {day}

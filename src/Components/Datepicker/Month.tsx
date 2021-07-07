@@ -2,11 +2,12 @@ import React, { FC } from "react";
 import { useMonth, GetDaysProps } from "@datepicker-react/hooks";
 import moment from "moment";
 import Day from "./Day";
-import { PickedDate } from "../../types/types";
+import { EventData } from "../../types/types";
 
 type PropsType = {
-  getDate: (payload: PickedDate) => void;
+  getDate: (payload: Date) => void;
   toggleCard: (payload: boolean) => void;
+  eventData: Array<EventData>;
 };
 
 const Month: FC<GetDaysProps & PropsType> = ({
@@ -15,6 +16,7 @@ const Month: FC<GetDaysProps & PropsType> = ({
   firstDayOfWeek,
   getDate,
   toggleCard,
+  eventData,
 }) => {
   const { days, weekdayLabels, monthLabel } = useMonth({
     year,
@@ -31,6 +33,16 @@ const Month: FC<GetDaysProps & PropsType> = ({
     },
   });
 
+  const dateNow = moment().date();
+  const monthNow = moment().month();
+
+  const dateArray = eventData.map((obj) => {
+    return {
+      day: moment(obj.touchedDate).date(),
+      month: moment(obj.touchedDate).month(),
+    };
+  });
+
   return (
     <div>
       <div className="datepicker__label">{monthLabel}</div>
@@ -45,28 +57,26 @@ const Month: FC<GetDaysProps & PropsType> = ({
       </div>
       <div className="datepicker__calendar">
         {days.map((day: any, id: number) => {
-          const dateNow = moment().date();
-          const monthNow = moment().month();
-          const dayIter =
-            day.date instanceof Date ? day.date.getDate() : day.date;
+          const dayIter = moment(day.date).date();
 
-          return dayIter === dateNow && month === monthNow ? (
+          const checkFilledDate = (): boolean | undefined => {
+            return (
+              dateArray.find(
+                (data) => data.month === month && data.day === dayIter
+              ) !== undefined
+            );
+          };
+
+          return (
             <Day
               date={day.date}
               key={id}
               day={day.dayLabel}
-              bgcolor={"blue"}
+              todaySelect={
+                dayIter === dateNow && month === monthNow ? true : false
+              }
+              filledDate={checkFilledDate()}
               getDate={getDate}
-              month={month}
-              toggleCard={toggleCard}
-            />
-          ) : (
-            <Day
-              getDate={getDate}
-              date={day.date}
-              key={id}
-              day={day.dayLabel}
-              month={month}
               toggleCard={toggleCard}
             />
           );

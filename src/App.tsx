@@ -1,5 +1,5 @@
 import React from "react";
-import UserCardContainer from "./Components/UserCard/UserCardContainer";
+import UserCardContainer from "./Components/UserCard/DateTimeCardContainer";
 import DatepickerContainer from "./Components/Datepicker/DatepickerContainer";
 
 import "./scss/global/reset.scss";

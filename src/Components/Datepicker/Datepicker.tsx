@@ -6,19 +6,19 @@ import {
   FocusedInput,
 } from "@datepicker-react/hooks";
 import Month from "./Month";
-import { PickedDate } from "../../types/types";
 
 import "./datepicker.scss";
+import { EventData } from "../../types/types";
 
 type PropsType = {
-  getDate: (payload: PickedDate) => void;
+  getDate: (payload: Date) => void;
   toggleCard: (payload: boolean) => void;
+  eventData: Array<EventData>;
 };
 
-const Datepicker: FC<PropsType> = ({ getDate, toggleCard }) => {
+const Datepicker: FC<PropsType> = ({ getDate, toggleCard, eventData }) => {
   const [state, setState] = useState({
     startDate: null as null | Date,
-    endDate: null as null | Date,
     focusedInput: START_DATE as FocusedInput,
   });
   const {
@@ -28,7 +28,6 @@ const Datepicker: FC<PropsType> = ({ getDate, toggleCard }) => {
     goToNextMonths,
   } = useDatepicker({
     startDate: state.startDate,
-    endDate: state.endDate,
     focusedInput: state.focusedInput,
     onDatesChange: handleDateChange,
     numberOfMonths: 1,
@@ -75,6 +74,7 @@ const Datepicker: FC<PropsType> = ({ getDate, toggleCard }) => {
             firstDayOfWeek={firstDayOfWeek}
             getDate={getDate}
             toggleCard={toggleCard}
+            eventData={eventData}
           />
         ))}
       </div>

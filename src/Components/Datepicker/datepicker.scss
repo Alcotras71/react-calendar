@@ -45,6 +45,12 @@ $grey: #ccc;
       background-color: $secondary-color;
       color: #000;
     }
+
+    &.event {
+      background-color: rgb(13, 114, 172);
+      border-radius: 10px;
+      color: #fff;
+    }
   }
 
   &__label {
@@ -77,6 +83,6 @@ $grey: #ccc;
 
   &__month-btn-wrapper {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
   }
 }
