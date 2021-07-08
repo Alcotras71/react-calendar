@@ -11,6 +11,7 @@ const Month: FC<GetDaysProps & PropsType> = ({
   getDate,
   toggleCard,
   eventData,
+  getPickedDate,
 }) => {
   const { days, weekdayLabels, monthLabel } = useMonth({
     year,
@@ -67,11 +68,12 @@ const Month: FC<GetDaysProps & PropsType> = ({
               key={id}
               day={day.dayLabel}
               todaySelect={
-                dayIter === dateNow && month === monthNow ? true : false
+                +day.dayLabel === dateNow && month === monthNow ? true : false
               }
               filledDate={checkFilledDate()}
               getDate={getDate}
               toggleCard={toggleCard}
+              getPickedDate={getPickedDate}
             />
           );
         })}
