@@ -6,10 +6,16 @@ const GET_DATE = "datepicker/GET_DATE";
 const GET_EVENT_DATA = "datepicker/GET_EVENT_DATA";
 const TOGGLE_CARD = "datepicker/TOGGLE_CARD";
 
+export type CardType = "eventForm" | "eventList";
+
 const initialState = {
   touchedDate: null as Date | null,
   isOpen: false as boolean,
+  // eventData: localStorage.getItem("eventData")
+  //   ? JSON.parse(localStorage.getItem("eventData") as string)
+  //   : ([] as Array<EventData>),
   eventData: [] as Array<EventData>,
+  cardType: "eventForm" as CardType,
 };
 
 export type DatepickerStateType = typeof initialState;
@@ -28,12 +34,11 @@ const datepickerReducer = (
     case TOGGLE_CARD:
       return {
         ...state,
-        isOpen: action.payload,
+        isOpen: action.payload.isOpen,
+        cardType: action.payload.cardType,
       };
 
     case GET_EVENT_DATA:
-      localStorage.setItem("selectedDates", JSON.stringify(action.payload));
-
       return {
         ...state,
         eventData: updateObjectInArray(state.eventData, action.payload),
@@ -44,31 +49,36 @@ const datepickerReducer = (
   }
 };
 
-type ActionsTypes = getDate | toggleCard | getEventData;
+type ActionsTypes = GetDate | ToggleCard | GetEventData;
 
-type getDate = {
+type GetDate = {
   type: typeof GET_DATE;
   payload: Date;
 };
-export const getDate = (payload: Date): getDate => ({
+export const getDate = (payload: Date): GetDate => ({
   type: GET_DATE,
   payload,
 });
 
-type toggleCard = {
-  type: typeof TOGGLE_CARD;
-  payload: boolean;
+export type ToggleCardPayload = {
+  isOpen: boolean;
+  cardType: CardType;
 };
-export const toggleCard = (payload: boolean): toggleCard => ({
+
+type ToggleCard = {
+  type: typeof TOGGLE_CARD;
+  payload: ToggleCardPayload;
+};
+export const toggleCard = (payload: ToggleCardPayload): ToggleCard => ({
   type: TOGGLE_CARD,
   payload,
 });
 
-type getEventData = {
+type GetEventData = {
   type: typeof GET_EVENT_DATA;
   payload: EventData;
 };
-export const getEventData = (payload: EventData): getEventData => ({
+export const getEventData = (payload: EventData): GetEventData => ({
   type: GET_EVENT_DATA,
   payload,
 });

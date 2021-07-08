@@ -1,5 +1,5 @@
 import React from "react";
-import UserCardContainer from "./Components/UserCard/DateTimeCardContainer";
+import DateTimeCardContainer from "./Components/EventForm/EventFormContainer";
 import DatepickerContainer from "./Components/Datepicker/DatepickerContainer";
 
 import "./scss/global/reset.scss";
@@ -11,7 +11,7 @@ class App extends React.Component {
       <div className="app">
         <div className="app__wrapper">
           <DatepickerContainer />
-          <UserCardContainer />
+          <DateTimeCardContainer />
         </div>
       </div>
     );

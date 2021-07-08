@@ -8,13 +8,7 @@ import {
 import Month from "./Month";
 
 import "./datepicker.scss";
-import { EventData } from "../../types/types";
-
-type PropsType = {
-  getDate: (payload: Date) => void;
-  toggleCard: (payload: boolean) => void;
-  eventData: Array<EventData>;
-};
+import { PropsType } from "./DatepickerContainer";
 
 const Datepicker: FC<PropsType> = ({ getDate, toggleCard, eventData }) => {
   const [state, setState] = useState({

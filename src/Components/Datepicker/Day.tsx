@@ -1,16 +1,14 @@
 import React, { FC, useState } from "react";
-import moment from "moment";
+import { MapDispatchPropsType } from "./DatepickerContainer";
 
 type DayPropsType = {
   day: string;
   todaySelect?: boolean;
   date: Date;
   filledDate?: boolean;
-  getDate: (payload: Date) => void;
-  toggleCard: (payload: boolean) => void;
 };
 
-const Day: FC<DayPropsType> = ({
+const Day: FC<DayPropsType & MapDispatchPropsType> = ({
   day,
   todaySelect,
   date,
@@ -24,11 +22,23 @@ const Day: FC<DayPropsType> = ({
 
   const [selected, setSelected] = useState(false);
 
-  return (
+  return filledDate ? (
+    <button
+      onClick={() => {
+        toggleCard({ isOpen: true, cardType: "eventList" });
+      }}
+      className={`datepicker__day ${
+        todaySelect || selected ? "selected" : ""
+      } ${filledDate ? "event" : ""}`}
+      type="button"
+    >
+      {day}
+    </button>
+  ) : (
     <button
       onClick={() => {
         getDate(date);
-        toggleCard(true);
+        toggleCard({ isOpen: true, cardType: "eventForm" });
         setSelected(true);
       }}
       onBlur={() => {

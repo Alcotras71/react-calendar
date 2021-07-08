@@ -9,7 +9,7 @@ module.exports = {
     mode: process.env.NODE_ENV || "development",
     devtool: 'eval-source-map',
     resolve: {
-        extensions: [".tsx", ".ts", ".js"],
+        extensions: [".tsx", ".ts", ".js", ".jsx"],
     },
     devServer: { contentBase: path.join(__dirname, "src") },
     module: {

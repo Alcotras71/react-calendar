@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getDate, toggleCard } from "../../redux/datepickerReducer";
 import { AppStateType } from "../../redux/store";
+import { ToggleCardPayload } from "../../redux/datepickerReducer";
 import { EventData } from "../../types/types";
 import Datepicker from "./Datepicker";
 
@@ -9,12 +10,12 @@ type MapStatePropsType = {
   eventData: Array<EventData>;
 };
 
-type MapDispatchPropsType = {
+export type MapDispatchPropsType = {
   getDate: (payload: Date) => void;
-  toggleCard: (payload: boolean) => void;
+  toggleCard: (payload: ToggleCardPayload) => void;
 };
 
-type PropsType = MapDispatchPropsType & MapStatePropsType;
+export type PropsType = MapDispatchPropsType & MapStatePropsType;
 
 class DatepickerContainer extends React.Component<PropsType> {
   render() {

@@ -2,13 +2,7 @@ import React, { FC } from "react";
 import { useMonth, GetDaysProps } from "@datepicker-react/hooks";
 import moment from "moment";
 import Day from "./Day";
-import { EventData } from "../../types/types";
-
-type PropsType = {
-  getDate: (payload: Date) => void;
-  toggleCard: (payload: boolean) => void;
-  eventData: Array<EventData>;
-};
+import { PropsType } from "./DatepickerContainer";
 
 const Month: FC<GetDaysProps & PropsType> = ({
   year,
