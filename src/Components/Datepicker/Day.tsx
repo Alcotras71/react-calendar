@@ -15,7 +15,6 @@ const Day: FC<DayPropsType & MapDispatchPropsType> = ({
   getDate,
   toggleCard,
   filledDate,
-  getPickedDate,
 }) => {
   if (!day) {
     return <div />;
@@ -27,6 +26,7 @@ const Day: FC<DayPropsType & MapDispatchPropsType> = ({
     <button
       onClick={() => {
         toggleCard({ isOpen: true, cardType: "eventList" });
+        getDate(date);
       }}
       className={`datepicker__day ${
         todaySelect || selected ? "selected" : ""
@@ -41,7 +41,6 @@ const Day: FC<DayPropsType & MapDispatchPropsType> = ({
         getDate(date);
         toggleCard({ isOpen: true, cardType: "eventForm" });
         setSelected(true);
-        getPickedDate(+day);
       }}
       onBlur={() => {
         setSelected(false);

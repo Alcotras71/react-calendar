@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useMonth, GetDaysProps } from "@datepicker-react/hooks";
 import moment from "moment";
 import Day from "./Day";
+import { checkFilledDate } from "../../utils/helpers/date-helpers";
 import { PropsType } from "./DatepickerContainer";
 
 const Month: FC<GetDaysProps & PropsType> = ({
@@ -11,7 +12,6 @@ const Month: FC<GetDaysProps & PropsType> = ({
   getDate,
   toggleCard,
   eventData,
-  getPickedDate,
 }) => {
   const { days, weekdayLabels, monthLabel } = useMonth({
     year,
@@ -54,14 +54,6 @@ const Month: FC<GetDaysProps & PropsType> = ({
         {days.map((day: any, id: number) => {
           const dayIter = moment(day.date).date();
 
-          const checkFilledDate = (): boolean | undefined => {
-            return (
-              dateArray.find(
-                (data) => data.month === month && data.day === dayIter
-              ) !== undefined
-            );
-          };
-
           return (
             <Day
               date={day.date}
@@ -70,10 +62,9 @@ const Month: FC<GetDaysProps & PropsType> = ({
               todaySelect={
                 +day.dayLabel === dateNow && month === monthNow ? true : false
               }
-              filledDate={checkFilledDate()}
+              filledDate={checkFilledDate(dateArray, month, dayIter)}
               getDate={getDate}
               toggleCard={toggleCard}
-              getPickedDate={getPickedDate}
             />
           );
         })}

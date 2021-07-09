@@ -14,7 +14,6 @@ const Datepicker: FC<PropsType> = ({
   getDate,
   toggleCard,
   eventData,
-  getPickedDate,
 }) => {
   const [state, setState] = useState({
     startDate: null as null | Date,
@@ -74,7 +73,6 @@ const Datepicker: FC<PropsType> = ({
             getDate={getDate}
             toggleCard={toggleCard}
             eventData={eventData}
-            getPickedDate={getPickedDate}
           />
         ))}
       </div>

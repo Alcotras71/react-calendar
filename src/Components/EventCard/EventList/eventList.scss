@@ -1,0 +1,58 @@
+$main-color: rgb(0, 166, 153);
+$secondary-color: rgb(102, 226, 218);
+
+.event-list {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  font-size: 17px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  &__event-wrapper {
+    overflow-y: auto;
+    height: 250px;
+  }
+
+  &__event {
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+  }
+
+  &__btn {
+    width: 200px;
+    height: 45px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 10px;
+    background-color: $main-color;
+    color: #fff;
+    transition: all 0.5s ease;
+    font-size: 20px;
+
+    &:hover {
+      color: #000;
+      background-color: $secondary-color;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+  background-color: $main-color;
+}

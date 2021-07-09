@@ -1,5 +1,5 @@
 import { combineReducers, compose, createStore } from "redux";
-import { setLocalStorageEventData } from "../common/localStorage";
+import { setLocalStorageEventData } from "../utils/common/localStorage";
 import datepickerReducer from "./datepickerReducer";
 
 const RootReducer = combineReducers({
@@ -15,9 +15,9 @@ const store = createStore(
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() || compose
 );
 
-// store.subscribe(() => {
-//   setLocalStorageEventData(store.getState().datepicker.eventData);
-// });
+store.subscribe(() => {
+  setLocalStorageEventData(store.getState().datepicker.eventData);
+});
 
 // @ts-ignore
 window.store = store;
