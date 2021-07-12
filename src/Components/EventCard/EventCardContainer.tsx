@@ -6,7 +6,7 @@ import {
   getEventData,
   CardType,
 } from "../../redux/datepickerReducer";
-import { AppStateType } from "../../redux/store";
+import { AppStateType } from "../../redux/rootReducer";
 import { ToggleCardPayload } from "../../redux/datepickerReducer";
 import { EventData } from "../../types/types";
 import EventCard from "./EventCard";

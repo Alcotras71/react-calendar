@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getDate, toggleCard } from "../../redux/datepickerReducer";
-import { AppStateType } from "../../redux/store";
+import { AppStateType } from "../../redux/rootReducer";
 import { ToggleCardPayload } from "../../redux/datepickerReducer";
 import { EventData } from "../../types/types";
 import Datepicker from "./Datepicker";

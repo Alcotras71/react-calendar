@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { PropsType } from "../Components/EventCard/EventCardContainer";
-import { AppStateType } from "../redux/store";
+import { AppStateType } from "../redux/rootReducer";
 
 type MapStatePropsType = {
   isOpen: boolean;

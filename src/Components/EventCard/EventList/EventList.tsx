@@ -15,9 +15,6 @@ type PropsType = {
 
 const EventList: FC<PropsType> = ({ touchedDate, eventData, toggleCard }) => {
   const pickedData = returnDescriptionPickedDate(eventData, touchedDate);
-  console.log(touchedDate, eventData);
-
-  console.log("pickedData", pickedData);
 
   return (
     <div className="event-list">

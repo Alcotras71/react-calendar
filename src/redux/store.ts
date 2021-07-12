@@ -1,19 +1,19 @@
-import { combineReducers, compose, createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
+import createSagaMiddleware from "redux-saga";
 import { setLocalStorageEventData } from "../utils/common/localStorage";
-import datepickerReducer from "./datepickerReducer";
+import { rootReducer } from "./rootReducer";
+import { sagaWatcher } from "./sagas";
 
-const RootReducer = combineReducers({
-  datepicker: datepickerReducer,
-});
-
-type RootReducerType = typeof RootReducer;
-export type AppStateType = ReturnType<RootReducerType>;
+const saga = createSagaMiddleware();
+const composeEnhacers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  RootReducer,
-  {},
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() || compose
+  rootReducer,
+  composeEnhacers(applyMiddleware(saga))
 );
+
+saga.run(sagaWatcher);
 
 store.subscribe(() => {
   setLocalStorageEventData(store.getState().datepicker.eventData);

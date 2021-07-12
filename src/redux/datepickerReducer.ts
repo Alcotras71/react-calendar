@@ -19,7 +19,7 @@ const initialState = {
 
 export type DatepickerStateType = typeof initialState;
 
-const datepickerReducer = (
+export const datepickerReducer = (
   state = initialState,
   action: ActionsTypes
 ): DatepickerStateType => {
