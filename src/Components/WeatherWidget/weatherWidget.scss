@@ -1,0 +1,60 @@
+.weather-widget {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  position: relative;
+  width: 350px;
+
+  &__wrapper {
+    margin-top: 50px;
+  }
+
+  &__text-wrapper {
+    font-size: 23px;
+    padding: 30px 20px;
+    background: linear-gradient(
+      90deg,
+      rgb(0, 166, 153) 7%,
+      rgb(102, 226, 218) 100%
+    );
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    color: #fff;
+  }
+
+  &__city {
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  &__image {
+    position: absolute;
+    right: 0;
+    top: -10px;
+  }
+
+  &__params {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  &__temp {
+    font-size: 50px;
+    line-height: 75px;
+    font-weight: 900;
+  }
+
+  &__details {
+    font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 5px;
+    border-bottom: 2px solid rgba(0, 212, 255, 1);
+    margin-bottom: 5px;
+  }
+
+  &__item {
+    margin-bottom: 5px;
+  }
+}

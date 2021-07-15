@@ -8,9 +8,11 @@ const instance = axios.create({
 });
 
 export const weatherAPI = {
-  fetchWeatherInfo(city: string, lang: string): Promise<any> {
+  fetchWeatherInfo(city: string, lang: string) {
     return instance
-      .get<any>(`weather?q=${city}&lang=${lang}&appid=${API_KEY}`)
+      .get<WeatherInfo>(
+        `weather?q=${city}&lang=${lang}&units=metric&appid=${API_KEY}`
+      )
       .then((response) => response.data);
   },
 };

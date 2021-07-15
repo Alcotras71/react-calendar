@@ -9,11 +9,11 @@ export function* sagaWatcher(): SagaIterator {
   yield takeEvery(REQUEST_WEATHER, sagaWorker);
 }
 
-function* sagaWorker(): any {
+function* sagaWorker(): Generator {
   try {
     yield put(showLoader());
     const payload = yield call(() => weatherAPI.fetchWeatherInfo("Tula", "ru"));
-    yield put(getWeatherInfo(payload));
+    yield put(getWeatherInfo(payload as WeatherInfo));
     yield put(hideLoader());
   } catch (e) {
     throw console.error(e);

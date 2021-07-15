@@ -10,11 +10,7 @@ import Month from "./Month";
 import "./datepicker.scss";
 import { PropsType } from "./DatepickerContainer";
 
-const Datepicker: FC<PropsType> = ({
-  getDate,
-  toggleCard,
-  eventData,
-}) => {
+const Datepicker: FC<PropsType> = ({ getDate, toggleCard, eventData }) => {
   const [state, setState] = useState({
     startDate: null as null | Date,
     focusedInput: START_DATE as FocusedInput,
@@ -25,6 +21,7 @@ const Datepicker: FC<PropsType> = ({
     goToPreviousMonths,
     goToNextMonths,
   } = useDatepicker({
+    endDate: null,
     startDate: state.startDate,
     focusedInput: state.focusedInput,
     onDatesChange: handleDateChange,
