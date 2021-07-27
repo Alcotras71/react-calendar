@@ -6,6 +6,7 @@ type ImageType = {
 export const returnDesiredImage = (
   imgArr: Array<ImageType>,
   icon: string
-): ImageType | undefined => {
-  return imgArr.find((img: ImageType) => img.key === icon);
-};
+): ImageType | undefined =>
+  imgArr instanceof Array
+    ? imgArr.find((img: ImageType) => img.key === icon)
+    : undefined;

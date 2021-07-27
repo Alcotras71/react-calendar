@@ -5,6 +5,7 @@ import {
   toggleCard,
   getEventData,
   CardType,
+  removeRecord,
 } from "../../redux/datepickerReducer";
 import { AppStateType } from "../../redux/rootReducer";
 import { ToggleCardPayload } from "../../redux/datepickerReducer";
@@ -24,6 +25,7 @@ export type MapDispatchPropsType = {
   getDate: (payload: Date) => void;
   toggleCard: (payload: ToggleCardPayload) => void;
   getEventData: (payload: EventData) => void;
+  removeRecord: (payload: EventData) => void;
 };
 
 export type PropsType = MapDispatchPropsType & MapStatePropsType;
@@ -40,6 +42,7 @@ class EventCardContainer extends React.Component<PropsType> {
           toggleCard={this.props.toggleCard}
           getDate={this.props.getDate}
           getEventData={this.props.getEventData}
+          removeRecord={this.props.removeRecord}
         />
       </>
     );
@@ -55,8 +58,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   };
 };
 
-export default connect(mapStateToProps, {
+const mapDispatchToProps: MapDispatchPropsType = {
   getDate,
   toggleCard,
   getEventData,
-})(EventCardContainer);
+  removeRecord,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventCardContainer);

@@ -1,5 +1,6 @@
 $main-color: rgb(0, 166, 153);
 $secondary-color: rgb(102, 226, 218);
+$disabled-color: rgba(8, 117, 108, 0.63);
 $grey: #ccc;
 
 .datepicker {
@@ -39,6 +40,13 @@ $grey: #ccc;
     &:hover {
       background-color: $secondary-color;
       color: #000;
+    }
+
+    &:disabled {
+      background-color: $disabled-color;
+      &:hover {
+        color: #fff;
+      }
     }
 
     &.selected {

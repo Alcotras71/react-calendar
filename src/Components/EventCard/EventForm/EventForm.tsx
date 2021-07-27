@@ -31,7 +31,7 @@ const EventForm: FC<PropsType> = ({
     e.preventDefault();
     toggleCard({ isOpen: true, cardType: "eventList" });
     getEventData({
-      touchedDate: touchedDate,
+      touchedDate: touchedDate?.toISOString(),
       startTime: startTime,
       endTime: endTime,
       eventName: eventName,
@@ -61,6 +61,7 @@ const EventForm: FC<PropsType> = ({
             locale="ru"
             className="event-card__time-input"
             dateFormat="dd/MM/yyyy"
+            minDate={new Date()}
           />
         </div>
         <div>

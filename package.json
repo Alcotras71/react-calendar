@@ -1,25 +1,5 @@
 {
   "name": "calendar",
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
-    },
-    "setupFiles": [
-      "raf/polyfill"
-    ],
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
-    "setupFilesAfterEnv": [
-      "./config/setupTests.ts"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json"
-    ]
-  },
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -41,9 +21,13 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.7",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-flow": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
+    "@jest/types": "^26.6.2",
     "@storybook/addon-actions": "^6.3.2",
     "@storybook/addon-essentials": "^6.3.2",
     "@storybook/addon-links": "^6.3.2",
@@ -67,6 +51,8 @@
     "html-webpack-plugin": "^5.3.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
+    "jsdom": "16.6.0",
+    "jsdom-global": "3.0.2",
     "path": "^0.12.7",
     "raf": "^3.4.1",
     "react-docgen-typescript-loader": "^3.7.2",
@@ -76,6 +62,7 @@
     "style-loader": "^3.0.0",
     "ts-jest": "^27.0.3",
     "ts-loader": "^9.2.3",
+    "ts-node": "^10.1.0",
     "webpack": "^5.41.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2",

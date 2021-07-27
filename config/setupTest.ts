@@ -5,6 +5,14 @@ import toJson from "enzyme-to-json";
 // React 17 Enzyme adapter
 Enzyme.configure({ adapter: new Adapter() });
 
+// @ts-ignore
+global.shallow = shallow;
+// @ts-ignore
+global.render = render;
+// @ts-ignore
+global.mount = mount;
+// @ts-ignore
+global.toJson = toJson;
 
 // Fail tests on any warning
 console.error = (message) => {

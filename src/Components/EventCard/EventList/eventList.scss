@@ -14,6 +14,27 @@ $secondary-color: rgb(102, 226, 218);
     height: 250px;
   }
 
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  &__btn-delete {
+    width: 30px;
+    height: 30px;
+    background: #ccc;
+    border-radius: 50%;
+    position: absolute;
+    right: 5px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background: $main-color;
+      color: #fff;
+    }
+  }
+
   &__event {
     margin-bottom: 10px;
   }

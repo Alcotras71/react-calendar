@@ -37,7 +37,12 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   };
 };
 
-export default connect(mapStateToProps, {
+const mapDispatchToProps: MapDispatchPropsType = {
   getDate,
   toggleCard,
-})(DatepickerContainer);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DatepickerContainer);

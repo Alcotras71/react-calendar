@@ -1,10 +1,9 @@
 export type EventData = {
-  touchedDate: Date | null;
+  touchedDate: string | undefined;
   startTime: string | Date;
   endTime: string | Date;
   eventName: string;
 };
-
 
 export type WeatherInfo = {
   coord: {

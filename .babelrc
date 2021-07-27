@@ -1,11 +1,24 @@
 {
-  "presets": [
-    "@babel/env",
-    "@babel/react",
-    "@babel/preset-typescript"
-  ],
-  "plugins": [
-    "@babel/plugin-proposal-class-properties"
-  ],
-  "sourceMaps": "both"
+  "presets": ["@babel/env", "@babel/react", "@babel/preset-typescript"],
+  "plugins": ["@babel/plugin-proposal-class-properties"],
+  "sourceMaps": "both",
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "modules": "commonjs",
+            "debug": false
+          }
+        ],
+        "@babel/preset-flow",
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-proposal-class-properties"
+      ]
+    }
+  }
 }

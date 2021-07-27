@@ -34,6 +34,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   };
 };
 
-export default connect(mapStateToProps, {
+const mapDispatchToProps: MapDispatchPropsType = {
   requestWeather,
-})(WeatherWidgetContainer);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WeatherWidgetContainer);

@@ -13,19 +13,17 @@ const Month: FC<GetDaysProps & PropsType> = ({
   toggleCard,
   eventData,
 }) => {
-  const { days, weekdayLabels, monthLabel } = useMonth({
+  const ru = moment().locale("ru").localeData();
+  const { days, monthLabel } = useMonth({
     year,
     month,
     firstDayOfWeek,
-    monthLabelFormat: (getDate) => {
-      const ru = moment()
-        .locale("ru")
-        .localeData()
-        .months(moment([year, month]));
-      const ruMonth = ru.charAt(0).toUpperCase() + ru.slice(1);
-      // Russian namespace
-      return ruMonth;
-    },
+    monthLabelFormat: (getDate) =>
+      // transform to russion locale
+      ru
+        .months(moment([year, month]))
+        .charAt(0)
+        .toUpperCase() + ru.months(moment([year, month])).slice(1),
   });
 
   const dateNow = moment().date();
@@ -37,6 +35,25 @@ const Month: FC<GetDaysProps & PropsType> = ({
       month: moment(obj.touchedDate).month(),
     };
   });
+
+  const weekdayLabels = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+
+  type PrevDate = {
+    month: number;
+    monthNow: number;
+    day: number;
+    dateNow: number;
+  };
+
+  const checkPreviousDates = ({ month, monthNow, day, dateNow }: PrevDate) => {
+    if (month < monthNow) {
+      return true;
+    } else if (month <= monthNow && day < dateNow) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <div>
@@ -65,6 +82,12 @@ const Month: FC<GetDaysProps & PropsType> = ({
               filledDate={checkFilledDate(dateArray, month, dayIter)}
               getDate={getDate}
               toggleCard={toggleCard}
+              checkPreviousDates={checkPreviousDates({
+                month,
+                monthNow,
+                day: +day.dayLabel,
+                dateNow,
+              })}
             />
           );
         })}

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preloader component should render Preloader component 1`] = `
+<div>
+  <img
+    alt="preloader"
+    src="test-file-stub"
+    style={
+      Object {
+        "left": "0%",
+        "position": "absolute",
+        "top": "0%",
+      }
+    }
+  />
+</div>
+`;
