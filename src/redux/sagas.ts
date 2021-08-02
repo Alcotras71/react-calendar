@@ -1,5 +1,5 @@
 import { SagaIterator } from "@redux-saga/types";
-import { call, put, SagaReturnType, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import { weatherAPI } from "../api/api";
 import { WeatherInfo } from "../types/types";
 import { hideLoader, showLoader } from "./appReducer";
@@ -9,13 +9,13 @@ export function* sagaWatcher(): SagaIterator {
   yield takeEvery(REQUEST_WEATHER, sagaWorker);
 }
 
-function* sagaWorker(): Generator {
+export function* sagaWorker(): Generator {
   try {
     yield put(showLoader());
     const payload = yield call(weatherAPI.fetchWeatherInfo, "Tula", "ru");
     yield put(getWeatherInfo(payload as WeatherInfo));
     yield put(hideLoader());
   } catch (e) {
-    throw console.error(e);
+    throw new Error(e);
   }
 }

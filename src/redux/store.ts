@@ -12,9 +12,9 @@ const store = createStore(rootReducer, composeEnhacers(applyMiddleware(saga)));
 
 saga.run(sagaWatcher);
 
-// store.subscribe(() => {
-//   setLocalStorageEventData(store.getState().datepicker.eventData);
-// });
+store.subscribe(() => {
+  setLocalStorageEventData(store.getState().datepicker.eventData);
+});
 
 // @ts-ignore
 window.store = store;

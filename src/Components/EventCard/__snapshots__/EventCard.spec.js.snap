@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventCard component render EventCard with props 1`] = `
+<div
+  className="event-card active"
+>
+  <div
+    className="event-card__form-wrapper"
+  >
+    <EventList
+      pickedData={
+        Array [
+          Object {
+            "endTime": "12:30",
+            "eventName": "mocki",
+            "startTime": "12:00",
+            "touchedDate": "2021-07-27T21:00:00.000Z",
+          },
+        ]
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`EventCard component render EventCard without props 1`] = `
+<div
+  className="event-card "
+>
+  <div
+    className="event-card__form-wrapper"
+  >
+    <EventList />
+  </div>
+</div>
+`;

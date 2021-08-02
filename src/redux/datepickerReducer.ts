@@ -3,20 +3,19 @@ import { EventData } from "../types/types";
 import { returnFilteredDates } from "../utils/helpers/date-helpers";
 import { updateObjectInArray } from "../utils/helpers/object-helpers";
 
-const GET_DATE = "datepicker/GET_DATE";
-const GET_EVENT_DATA = "datepicker/GET_EVENT_DATA";
-const TOGGLE_CARD = "datepicker/TOGGLE_CARD";
-const REMOVE_RECORD = "datepicker/REMOVE_RECORD";
+export const GET_DATE = "datepicker/GET_DATE";
+export const GET_EVENT_DATA = "datepicker/GET_EVENT_DATA";
+export const TOGGLE_CARD = "datepicker/TOGGLE_CARD";
+export const REMOVE_RECORD = "datepicker/REMOVE_RECORD";
 
 export type CardType = "eventForm" | "eventList";
 
 export const initialState = {
   touchedDate: null as Date | null,
   isOpen: false as boolean,
-  eventData: [] as Array<EventData>,
-  // localStorage.getItem("eventData")
-  //   ? JSON.parse(localStorage.getItem("eventData") as string)
-  //   : ([] as Array<EventData>),
+  eventData: localStorage.getItem("eventData")
+    ? JSON.parse(localStorage.getItem("eventData") as string)
+    : ([] as Array<EventData>),
   cardType: "eventList" as CardType,
 };
 

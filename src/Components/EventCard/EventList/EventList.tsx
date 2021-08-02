@@ -2,28 +2,19 @@ import moment from "moment";
 import React, { FC } from "react";
 import { CardType, ToggleCardPayload } from "../../../redux/datepickerReducer";
 import { EventData } from "../../../types/types";
+import NewEventBtn from "./NewEventBtn";
 
 import "./eventList.scss";
 
-type PropsType = {
+export type PropsType = {
   pickedData: Array<EventData> | undefined;
-  getDate: (payload: Date) => void;
   toggleCard: (payload: ToggleCardPayload) => void;
   removeRecord: (payload: EventData) => void;
-};
-
-type HandleToggleCardType = {
-  isOpen: boolean;
-  cardType: CardType;
 };
 
 const EventList: FC<PropsType> = ({ pickedData, toggleCard, removeRecord }) => {
   const handleRemoveRecord = (pickedData: Array<EventData>, index: number) => {
     removeRecord(pickedData && pickedData[index]);
-  };
-
-  const handleToggleCard = ({ isOpen, cardType }: HandleToggleCardType) => {
-    toggleCard({ isOpen, cardType });
   };
 
   return (
@@ -51,15 +42,10 @@ const EventList: FC<PropsType> = ({ pickedData, toggleCard, removeRecord }) => {
           );
         })}
       </div>
-      <button
-        onClick={() =>
-          handleToggleCard({ isOpen: true, cardType: "eventForm" })
-        }
-        className="event-list__btn"
-        type="submit"
-      >
+
+      <NewEventBtn isOpen={true} cardType={"eventForm"} toggleCard={toggleCard}>
         Новое событие
-      </button>
+      </NewEventBtn>
     </div>
   );
 };

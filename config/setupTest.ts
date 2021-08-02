@@ -14,6 +14,14 @@ global.mount = mount;
 // @ts-ignore
 global.toJson = toJson;
 
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn(),
+};
+// @ts-ignore
+global.localStorage = localStorageMock;
+
 // Fail tests on any warning
 console.error = (message) => {
   throw new Error(message);

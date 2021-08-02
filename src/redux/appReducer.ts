@@ -1,11 +1,11 @@
-const SHOW_LOADER = "app/SHOW_LOADER";
-const HIDE_LOADER = "app/HIDE_LOADER";
+export const SHOW_LOADER = "app/SHOW_LOADER";
+export const HIDE_LOADER = "app/HIDE_LOADER";
 
 //--------------------
 type InitialState = {
   loading: boolean;
 };
-const initialState: InitialState = {
+export const initialState: InitialState = {
   loading: false,
 };
 //--------------------

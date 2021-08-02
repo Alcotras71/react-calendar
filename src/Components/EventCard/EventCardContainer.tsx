@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { connect } from "react-redux";
 import {
   getDate,
@@ -10,7 +10,9 @@ import {
 import { AppStateType } from "../../redux/rootReducer";
 import { ToggleCardPayload } from "../../redux/datepickerReducer";
 import { EventData } from "../../types/types";
-import EventCard from "./EventCard";
+import { returnDescriptionPickedDate } from "../../utils/helpers/date-helpers";
+import EventForm from "./EventForm/EventForm";
+import EventList from "./EventList/EventList";
 
 import "./eventCard.scss";
 
@@ -28,23 +30,42 @@ export type MapDispatchPropsType = {
   removeRecord: (payload: EventData) => void;
 };
 
-export type PropsType = MapDispatchPropsType & MapStatePropsType;
+type OwnProps = {
+  children?: ReactNode;
+  rest?: any;
+};
 
-class EventCardContainer extends React.Component<PropsType> {
+export type PropsType = MapDispatchPropsType & MapStatePropsType & OwnProps;
+
+export class EventCard extends React.Component<PropsType> {
   render() {
+    const pickedData = returnDescriptionPickedDate(
+      this.props.eventData,
+      this.props.touchedDate
+    );
+
     return (
-      <>
-        <EventCard
-          cardType={this.props.cardType}
-          eventData={this.props.eventData}
-          touchedDate={this.props.touchedDate}
-          isOpen={this.props.isOpen}
-          toggleCard={this.props.toggleCard}
-          getDate={this.props.getDate}
-          getEventData={this.props.getEventData}
-          removeRecord={this.props.removeRecord}
-        />
-      </>
+      <div
+        style={this.props.rest}
+        className={`event-card ${this.props.isOpen ? "active" : ""}`}
+      >
+        <div className="event-card__form-wrapper">
+          {this.props.cardType === "eventForm" ? (
+            <EventForm
+              toggleCard={this.props.toggleCard}
+              touchedDate={this.props.touchedDate}
+              getDate={this.props.getDate}
+              getEventData={this.props.getEventData}
+            />
+          ) : (
+            <EventList
+              pickedData={pickedData}
+              toggleCard={this.props.toggleCard}
+              removeRecord={this.props.removeRecord}
+            />
+          )}
+        </div>
+      </div>
     );
   }
 }
@@ -65,4 +86,4 @@ const mapDispatchToProps: MapDispatchPropsType = {
   removeRecord,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventCardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(EventCard);

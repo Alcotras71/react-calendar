@@ -6,35 +6,16 @@ import {
 } from "./helpers/date-helpers";
 import { returnDesiredImage } from "./helpers/images/image-helpers";
 
-const mockEventDataArr = [
-  {
-    touchedDate: "2021-07-27T21:00:00.000Z",
-    startTime: "12:00",
-    endTime: "12:30",
-    eventName: "mocki",
-  },
-];
-const mockEventData = {
-  touchedDate: "2021-07-27T21:00:00.000Z",
-  startTime: "12:00",
-  endTime: "12:30",
-  eventName: "mocki",
-};
-const mockEventData2 = {
-  touchedDate: "2021-08-27T21:00:00.000Z",
-  startTime: "11:00",
-  endTime: "15:30",
-  eventName: "mocddd",
-};
+import { mockEventData } from "../../__mocks__/mock";
 
 describe("object-helper util", () => {
   it("Positive object cases", () => {
-    expect(updateObjectInArray(mockEventDataArr, mockEventData)).toStrictEqual(
-      mockEventDataArr
-    );
     expect(
-      updateObjectInArray(mockEventDataArr, mockEventData2)
-    ).toStrictEqual([...mockEventDataArr, mockEventData2]);
+      updateObjectInArray(mockEventData.eventDataArr, mockEventData.eventData)
+    ).toStrictEqual(mockEventData.eventDataArr);
+    expect(
+      updateObjectInArray(mockEventData.eventDataArr, mockEventData.eventData2)
+    ).toStrictEqual([...mockEventData.eventDataArr, mockEventData.eventData2]);
   });
 
   it("Negative object cases", () => {
@@ -58,14 +39,17 @@ describe("date-helpers utils", () => {
 
   it("Positive returnDescriptionPickedDate cases", () => {
     expect(
-      returnDescriptionPickedDate(mockEventDataArr, mockEventData.touchedDate)
-    ).toMatchObject(mockEventDataArr);
+      returnDescriptionPickedDate(
+        mockEventData.eventDataArr,
+        mockEventData.eventData.touchedDate
+      )
+    ).toMatchObject([mockEventData.eventData]);
   });
 
   it("Positive returnFilteredDates cases", () => {
-    expect(returnFilteredDates(mockEventDataArr, mockEventData)).toMatchObject(
-      {}
-    );
+    expect(
+      returnFilteredDates(mockEventData.eventDataArr, mockEventData.eventData)
+    ).toMatchObject({});
   });
 });
 

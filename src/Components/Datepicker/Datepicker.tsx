@@ -10,11 +10,7 @@ import Month from "./Month";
 import "./datepicker.scss";
 import { PropsType } from "./DatepickerContainer";
 
-const Datepicker: FC<PropsType> = ({
-  getDate,
-  toggleCard,
-  eventData,
-}) => {
+const Datepicker: FC<PropsType> = ({ getDate, toggleCard, eventData }) => {
   const [state, setState] = useState({
     startDate: null as null | Date,
     focusedInput: START_DATE as FocusedInput,
@@ -59,12 +55,7 @@ const Datepicker: FC<PropsType> = ({
         </button>
       </div>
 
-      <div
-        className="datepicker__wrapper"
-        style={{
-          gridTemplateColumns: `repeat(${activeMonths.length}, 350px)`,
-        }}
-      >
+      <div>
         {activeMonths.map((month) => (
           <Month
             key={`${month.year}-${month.month}`}

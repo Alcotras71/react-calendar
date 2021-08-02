@@ -87,6 +87,7 @@ $grey: #ccc;
     display: grid;
     margin: 32px 0 0;
     grid-gap: 0 64px;
+    grid-template-columns: repeat(1, 350px);
   }
 
   &__month-btn-wrapper {

@@ -1,10 +1,10 @@
 import { WeatherInfo } from "../types/types";
 
-const GET_WEATHER_INFO = "weather/GET_WEATHER_INFO";
+export const GET_WEATHER_INFO = "weather/GET_WEATHER_INFO";
 export const REQUEST_WEATHER = "sagas/REQUEST_WEATHER";
 
 //--------------------
-const initialState = {
+export const initialState = {
   weatherInfo: null as WeatherInfo | null ,
 };
 type InitialState = typeof initialState;

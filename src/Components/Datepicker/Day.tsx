@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
-import { CardType } from "../../redux/datepickerReducer";
+import React, { FC } from "react";
 import { MapDispatchPropsType } from "./DatepickerContainer";
+import DayButton from "./DayButton";
 
 type DayPropsType = {
   day: string;
@@ -19,47 +19,35 @@ const Day: FC<DayPropsType & MapDispatchPropsType> = ({
   filledDate,
   checkPreviousDates,
 }) => {
-  const [selected, setSelected] = useState(false);
-
-  const onClickHandler = (date: Date, cardType: CardType, selected = false) => {
-    getDate(date);
-    toggleCard({ isOpen: true, cardType });
-    selected && setSelected(true);
-  };
-
-  const dayClassName = `datepicker__day ${
-    todaySelect || selected ? "selected" : ""
-  } ${filledDate ? "event" : ""}`;
-
   if (!day) {
     return <div />;
   }
 
   return filledDate ? (
-    <button
-      onClick={() => {
-        onClickHandler(date, "eventList");
-      }}
-      className={dayClassName}
-      type="button"
-      disabled={checkPreviousDates}
+    <DayButton
+      checkPreviousDates={checkPreviousDates}
+      date={date}
+      cardType={"eventList"}
+      todaySelect={todaySelect}
+      filledDate={filledDate}
+      getDate={getDate}
+      toggleCard={toggleCard}
     >
       {day}
-    </button>
+    </DayButton>
   ) : (
-    <button
-      disabled={checkPreviousDates}
-      onClick={() => {
-        onClickHandler(date, "eventForm", true);
-      }}
-      onBlur={() => {
-        setSelected(false);
-      }}
-      className={dayClassName}
-      type="button"
+    <DayButton
+      checkPreviousDates={checkPreviousDates}
+      date={date}
+      cardType={"eventForm"}
+      isSelected={true}
+      todaySelect={todaySelect}
+      filledDate={filledDate}
+      getDate={getDate}
+      toggleCard={toggleCard}
     >
       {day}
-    </button>
+    </DayButton>
   );
 };
 

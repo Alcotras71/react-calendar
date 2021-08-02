@@ -29,12 +29,15 @@ const Month: FC<GetDaysProps & PropsType> = ({
   const dateNow = moment().date();
   const monthNow = moment().month();
 
-  const dateArray = eventData.map((obj) => {
-    return {
-      day: moment(obj.touchedDate).date(),
-      month: moment(obj.touchedDate).month(),
-    };
-  });
+  const dateArray =
+    eventData && eventData.length > 0
+      ? eventData.map((obj) => {
+          return {
+            day: moment(obj.touchedDate).date(),
+            month: moment(obj.touchedDate).month(),
+          };
+        })
+      : [];
 
   const weekdayLabels = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 
@@ -56,7 +59,7 @@ const Month: FC<GetDaysProps & PropsType> = ({
   };
 
   return (
-    <div>
+    <div className="datepicker__wrapper">
       <div className="datepicker__label">{monthLabel}</div>
       <div className="datepicker__week">
         {weekdayLabels.map(

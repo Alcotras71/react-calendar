@@ -18,10 +18,13 @@ export const returnDescriptionPickedDate = (
   dateArray: Array<EventData>,
   touchedDate: Date | null
 ): Array<EventData> | undefined => {
-  return dateArray.filter(
-    (data) =>
-      moment(data.touchedDate).toISOString() ===
-      moment(touchedDate).toISOString()
+  return (
+    dateArray &&
+    dateArray.filter(
+      (data) =>
+        moment(data.touchedDate).toISOString() ===
+        moment(touchedDate).toISOString()
+    )
   );
 };
 
