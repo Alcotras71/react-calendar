@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { MapDispatchPropsType } from "./DatepickerContainer";
-import DayButton from "./DayButton";
+import DayButton, { DayButtonType } from "./DayButton";
 
 type DayPropsType = {
   day: string;
@@ -23,32 +23,18 @@ const Day: FC<DayPropsType & MapDispatchPropsType> = ({
     return <div />;
   }
 
-  return filledDate ? (
-    <DayButton
-      checkPreviousDates={checkPreviousDates}
-      date={date}
-      cardType={"eventList"}
-      todaySelect={todaySelect}
-      filledDate={filledDate}
-      getDate={getDate}
-      toggleCard={toggleCard}
-    >
-      {day}
-    </DayButton>
-  ) : (
-    <DayButton
-      checkPreviousDates={checkPreviousDates}
-      date={date}
-      cardType={"eventForm"}
-      isSelected={true}
-      todaySelect={todaySelect}
-      filledDate={filledDate}
-      getDate={getDate}
-      toggleCard={toggleCard}
-    >
-      {day}
-    </DayButton>
-  );
+  const childProps: DayButtonType & MapDispatchPropsType = {
+    checkPreviousDates,
+    date,
+    cardType: filledDate ? "eventList" : "eventForm",
+    isSelected: !filledDate,
+    todaySelect,
+    filledDate,
+    getDate,
+    toggleCard,
+  };
+
+  return <DayButton {...childProps}>{day}</DayButton>;
 };
 
 export default Day;

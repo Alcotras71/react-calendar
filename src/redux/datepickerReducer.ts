@@ -3,10 +3,12 @@ import { EventData } from "../types/types";
 import { returnFilteredDates } from "../utils/helpers/date-helpers";
 import { updateObjectInArray } from "../utils/helpers/object-helpers";
 
-export const GET_DATE = "datepicker/GET_DATE";
-export const GET_EVENT_DATA = "datepicker/GET_EVENT_DATA";
-export const TOGGLE_CARD = "datepicker/TOGGLE_CARD";
-export const REMOVE_RECORD = "datepicker/REMOVE_RECORD";
+const enum actions {
+  GET_DATE = "datepicker/GET_DATE",
+  GET_EVENT_DATA = "datepicker/GET_EVENT_DATA",
+  TOGGLE_CARD = "datepicker/TOGGLE_CARD",
+  REMOVE_RECORD = "datepicker/REMOVE_RECORD",
+}
 
 export type CardType = "eventForm" | "eventList";
 
@@ -26,26 +28,26 @@ export const datepickerReducer = (
   action: ActionsTypes
 ): DatepickerStateType => {
   switch (action.type) {
-    case GET_DATE:
+    case actions.GET_DATE:
       return {
         ...state,
         touchedDate: action.payload,
       };
 
-    case TOGGLE_CARD:
+    case actions.TOGGLE_CARD:
       return {
         ...state,
         isOpen: action.payload.isOpen,
         cardType: action.payload.cardType,
       };
 
-    case GET_EVENT_DATA:
+    case actions.GET_EVENT_DATA:
       return {
         ...state,
         eventData: updateObjectInArray(state.eventData, action.payload),
       };
 
-    case REMOVE_RECORD:
+    case actions.REMOVE_RECORD:
       return {
         ...state,
         eventData: returnFilteredDates(state.eventData, action.payload),
@@ -61,11 +63,11 @@ type ActionsTypes = GetDate | ToggleCard | GetEventData | RemoveRecord;
 
 //--------------------
 type GetDate = {
-  type: typeof GET_DATE;
+  type: actions.GET_DATE;
   payload: Date;
 };
 export const getDate = (payload: Date): GetDate => ({
-  type: GET_DATE,
+  type: actions.GET_DATE,
   payload,
 });
 //--------------------
@@ -74,29 +76,29 @@ export type ToggleCardPayload = {
   cardType: CardType;
 };
 type ToggleCard = {
-  type: typeof TOGGLE_CARD;
+  type: actions.TOGGLE_CARD;
   payload: ToggleCardPayload;
 };
 export const toggleCard = (payload: ToggleCardPayload): ToggleCard => ({
-  type: TOGGLE_CARD,
+  type: actions.TOGGLE_CARD,
   payload,
 });
 //--------------------
 type GetEventData = {
-  type: typeof GET_EVENT_DATA;
+  type: actions.GET_EVENT_DATA;
   payload: EventData;
 };
 export const getEventData = (payload: EventData): GetEventData => ({
-  type: GET_EVENT_DATA,
+  type: actions.GET_EVENT_DATA,
   payload,
 });
 //--------------------
 type RemoveRecord = {
-  type: typeof REMOVE_RECORD;
+  type: actions.REMOVE_RECORD;
   payload: EventData;
 };
 export const removeRecord = (payload: EventData): RemoveRecord => ({
-  type: REMOVE_RECORD,
+  type: actions.REMOVE_RECORD,
   payload,
 });
 

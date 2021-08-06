@@ -20,11 +20,7 @@ class WeatherWidgetContainer extends React.Component<PorpsType> {
   }
 
   render = () => {
-    return (
-      <>
-        <WeatherWidget weatherInfo={this.props.weatherInfo} />
-      </>
-    );
+    return <WeatherWidget weatherInfo={this.props.weatherInfo} />;
   };
 }
 

@@ -3,10 +3,10 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { weatherAPI } from "../api/api";
 import { WeatherInfo } from "../types/types";
 import { hideLoader, showLoader } from "./appReducer";
-import { getWeatherInfo, REQUEST_WEATHER } from "./weatherReducer";
+import { getWeatherInfo, actions } from "./weatherReducer";
 
 export function* sagaWatcher(): SagaIterator {
-  yield takeEvery(REQUEST_WEATHER, sagaWorker);
+  yield takeEvery(actions.REQUEST_WEATHER, sagaWorker);
 }
 
 export function* sagaWorker(): Generator {
